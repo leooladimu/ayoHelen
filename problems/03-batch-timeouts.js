@@ -33,8 +33,36 @@ console.log(timeoutObjs); // [ Timeout {...},  Timeout {...}, Timeout {...} ]
 ***********************************************************************/
 
 function batchTimeouts(callbacks, delays) {
-  // Your code here
+  
+  function recursed(callbacks, delays) {
+    // console.log(setTimeout(callbacks[0], delays[0]));
+    setTimeout(callbacks[0], delays[0])
+    // console.log('3g2e');
+    callbacks.shift()
+    delays.shift()
+    if (callbacks.length === 1) {
+      return setTimeout(callbacks[0], delays[0])
+    }
+    return recursed(callbacks, delays)
+  }
+
+  return recursed(callbacks, delays)
 }
+
+// 
+// const sayHello = () => console.log('hi');
+// const sayGoodbye = () => console.log('bye');
+// const shout = () => console.log('WHAT?');
+// const tasks = [sayHello, sayGoodbye, shout];
+// const delays = [500, 200, 900];
+// 
+// const timeoutObjs = batchTimeouts(tasks, delays); 
+// // should print: 
+// //  'bye' after 200 ms
+// //  'hi' after 500 ms
+// //  'WHAT?' after 900 ms
+// 
+// console.log(timeoutObjs); // [ Timeout {...},  Timeout {...}, Timeout {...} ]
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
 try {

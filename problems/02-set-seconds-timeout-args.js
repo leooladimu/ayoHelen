@@ -23,8 +23,18 @@ setSecondsTimeoutArgs(function(arg1, arg2) {
 ***********************************************************************/
 
 function setSecondsTimeoutArgs(cb, delayInSeconds, ...args) {
-  // Your code here
+  let seconds = delayInSeconds * 1000;
+  return setTimeout(cb, seconds, ...args);
 }
+
+function printSum(num1, num2, num3) {
+  console.log(num1 + num2 + num3);
+}
+setSecondsTimeoutArgs(printSum, 0.25, 5, 1, 4); // should print '10' after 250ms
+
+setSecondsTimeoutArgs(function(arg1, arg2) {
+  console.log(arg1 + '-' + arg2);
+}, 0.7, 'hello', 'world'); // should print 'hello-world' after 700ms
 
 /**************DO NOT MODIFY ANYTHING UNDER THIS  LINE*****************/
 try {
@@ -32,3 +42,8 @@ try {
 } catch {
   module.exports = null;
 }
+
+// function setSecondsTimeout(cb, delayInSeconds) {
+//   let seconds = delayInSeconds * 1000;
+//   return setTimeout(cb, seconds);
+// }
